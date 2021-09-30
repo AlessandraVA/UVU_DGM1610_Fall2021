@@ -11,6 +11,8 @@ public class PlayerController : MonoBehaviour
     public float xRange = 8.72f;
     public float yRange = 4.47f;
     
+    public GameObject projectile;
+    public Vector3 offset = new Vector3(0,1,0);
     
     // public float health;
     
@@ -31,6 +33,12 @@ public class PlayerController : MonoBehaviour
         if(transform.position.x > xRange)
         {
             transform.position = new Vector3( xRange, transform.position.y, transform.position.z);
+        }
+
+
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            Instantiate(projectile, transform.position + offset, projectile.transform.rotation);
         }
     }
 }
