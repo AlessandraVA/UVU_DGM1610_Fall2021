@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     
-    public float speed = 20.0f;
+    public float speed = 25.0f;
     public float turnSpeed = 50.0f;
     public float hInput;
     public float vInput;
@@ -21,12 +21,13 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        hInput = Input.GetAxis("Horizontal");
-        vInput = Input.GetAxis("Vertical");
+        hInput = Input.GetAxisRaw("Horizontal");
+        vInput = Input.GetAxisRaw("Vertical");
 
 
         transform.Rotate(Vector3.back, turnSpeed * hInput * Time.deltaTime);
         transform.Translate(Vector3.up * speed * vInput * Time.deltaTime);
+        
         // Create a wall on the -x side
         if(transform.position.x < -xRange)
         {
@@ -48,7 +49,7 @@ public class PlayerController : MonoBehaviour
         }
         if(Input.GetKeyDown(KeyCode.Space))
         {
-            Instantiate(projectile, launcher.transform.position, projectile.transform.rotation);
+            Instantiate(projectile, launcher.transform.position, launcher.transform.rotation);
         }
     }
 }
