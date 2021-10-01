@@ -4,11 +4,6 @@ using UnityEngine;
 
 public class EnemyAI : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update()
@@ -18,6 +13,10 @@ public class EnemyAI : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collider)
     {
-        Destroy(gameObject);
+        //Destroy enemy if the collider hitting the trigger has the tag projectile
+        if(collider.CompareTag("Projectile"))
+           {
+               Destroy(gameObject);
+           } 
     }
 }
