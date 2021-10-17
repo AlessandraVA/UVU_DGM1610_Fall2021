@@ -40,26 +40,25 @@ public class PlayerController : MonoBehaviour
             if(weapon.CanShoot())
                 weapon.Shoot();
         }
-    }
-    
-    void FixedUpdate()
-    {
-         if(Input.GetButtonDown("Jump"))
+        // Jump Button
+        if(Input.GetButtonDown("Jump"))
             Jump();
     }
-
+    
+    
     void Move()
     {
         float x = Input.GetAxis("Horizontal") * moveSpeed;
         float z = Input.GetAxis("Vertical") * moveSpeed;
 
         //rb.velocity = new Vector3(x, rb.velocity.y, z); - old code
-        
+        // Move direction relative to camera
         Vector3 dir = transform.right * x + transform.forward * z;
+        
+        dir.y = rb.velocity.y;
         rb.velocity = dir;
-
-
     }
+        
         
         void CamLook()
         {
@@ -76,6 +75,9 @@ public class PlayerController : MonoBehaviour
             Ray ray = new Ray(transform.position, Vector3.down);
 
             if(Physics.Raycast(ray, 1.1f))
+            {
+                // Add force to Jump
                 rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            }   
         }
 }

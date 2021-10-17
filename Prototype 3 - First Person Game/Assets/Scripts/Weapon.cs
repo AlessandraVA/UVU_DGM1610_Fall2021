@@ -23,6 +23,7 @@ public class Weapon : MonoBehaviour
     {
         // Disable cursor
         Cursor.lockState = CursorLockMode.Locked;
+        
         if(GetComponent<PlayerController>())
             isPlayer = true;
     }
