@@ -150,7 +150,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 83945378}
   m_LocalRotation: {x: -0, y: -0.20773236, z: -0, w: 0.9781857}
-  m_LocalPosition: {x: 9.890339, y: 7.6900983, z: 20.62809}
+  m_LocalPosition: {x: 9.890339, y: 7.36, z: 20.62809}
   m_LocalScale: {x: 9.33596, y: 3.086778, z: 3.0867782}
   m_Children: []
   m_Father: {fileID: 1968525075}
@@ -236,7 +236,7 @@ GameObject:
   - component: {fileID: 135358146}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -349,6 +349,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   jumpForce: 10
+  curHp: 10
+  maxHp: 10
   lookSensitivity: 3
   maxLookX: 45
   minLookX: -45
@@ -369,7 +371,7 @@ MonoBehaviour:
   curAmmo: 10
   maxAmmo: 10
   infiniteAmmo: 1
-  bulletSpeed: 50
+  bulletSpeed: 10
   shootRate: 1
 --- !u!114 &135358146
 MonoBehaviour:
@@ -403,7 +405,7 @@ GameObject:
   - component: {fileID: 224481154}
   m_Layer: 0
   m_Name: Enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -421,7 +423,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objPrefab: {fileID: 271328465715061311, guid: df55a0df367da4eeb958c56d227a449f, type: 3}
-  createOnStart: 1
+  createOnStart: 3
 --- !u!114 &224481155
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -530,7 +532,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 224481153}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.57, y: 1.5, z: -0.1570354}
+  m_LocalPosition: {x: 4.59, y: 1.49, z: -0.1570354}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 841364000}

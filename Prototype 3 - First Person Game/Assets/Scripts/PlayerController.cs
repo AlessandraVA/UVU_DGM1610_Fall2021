@@ -5,9 +5,14 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
 
+    [Header("Stats")]
     public float moveSpeed;                         // movement speed in units per second
     public float jumpForce;                        // force applied upwards
+    
+    public int curHp;
+    public int maxHp;
 
+    [Header("Mouse Look")]
     public float lookSensitivity;                 // Mouse look sensitivity
     public float maxLookX;                       // Lowest down we can look
     public float minLookX;                      // Highest up we can look
@@ -28,23 +33,19 @@ public class PlayerController : MonoBehaviour
         camera = Camera.main;
         rb = GetComponent<Rigidbody>();
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        Move();
-        CamLook();
-        // Fire Button
-        if(Input.GetButton("Fire1"))
+    //Applies Damage to the Player
+    public void TakeDamage(int damage)
         {
-            if(weapon.CanShoot())
-                weapon.Shoot();
+            curHp -= damage;
+
+            if(curHp <= 0)
+                Die();
         }
-        // Jump Button
-        if(Input.GetButtonDown("Jump"))
-            Jump();
-    }
-    
+        // If Player health is reduced to zero or below then run Die()
+        void Die()
+        {
+            
+        }
     
     void Move()
     {
@@ -80,4 +81,19 @@ public class PlayerController : MonoBehaviour
                 rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             }   
         }
+        // Update is called once per frame
+    void Update()
+    {
+        Move();
+        CamLook();
+        // Fire Button
+        if(Input.GetButton("Fire1"))
+        {
+            if(weapon.CanShoot())
+                weapon.Shoot();
+        }
+        // Jump Button
+        if(Input.GetButtonDown("Jump"))
+            Jump();
+    }
 }
