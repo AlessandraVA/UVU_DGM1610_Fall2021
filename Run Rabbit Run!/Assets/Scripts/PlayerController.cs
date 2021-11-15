@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    private LayerMask layerMask;
+    private Rigidbody2D rigidbody2d;
     public float moveSpeed;
     public float jumpforce;
+    private BoxCollider2D boxCollider2d;
 
     private Rigidbody2D rb;
     private bool facingRight = true;
@@ -16,6 +19,8 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();           //will look for a component on the GameObject of the Rigidbody 2D type
+        rigidbody2d = transform.GetComponent<Rigidbody2D>();
+        boxCollider2d = transform.GetComponent<BoxCollider2D>();
     }
 
     // Update is called once per frame
@@ -32,6 +37,12 @@ public class PlayerController : MonoBehaviour
             FlipCharacter();
         }
         rb.velocity = new Vector2(moveDirection * moveSpeed, rb.velocity.y);        // Movement
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            float jumpVelocity = 10f;
+            rigidbody2d.velocity = Vector2.up * jumpVelocity;
+        }
     }
     
     private void FlipCharacter()
