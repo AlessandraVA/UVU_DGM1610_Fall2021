@@ -26,6 +26,11 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(transform.position.y >= 2)
+        {
+            // Y axis barrier for the player
+            transform.position = new Vector3(transform.position.x, 2, 0);
+        }
         moveDirection = Input.GetAxis("Horizontal");
         // Animate
         if(moveDirection > 0 && facingRight)
