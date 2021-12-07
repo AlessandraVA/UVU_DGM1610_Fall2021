@@ -4,6 +4,16 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+     public float speed = 25.0f;
+    public float turnSpeed = 50.0f;
+    public float hInput;
+    public float vInput;
+    public float xRange = 10.45f;
+    public float yRange = 4.62f;
+    
+    public GameObject projectile;
+    public Vector3 offset = new Vector3(0,1,0);
+
     private LayerMask layerMask;
     private Rigidbody2D rigidbody2d;
     public float moveSpeed;
@@ -26,11 +36,31 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(transform.position.y >= 2)
-        {
-            // Y axis barrier for the player
-            transform.position = new Vector3(transform.position.x, 2, 0);
-        }
+       hInput = Input.GetAxisRaw("Horizontal");
+       vInput = Input.GetAxisRaw("Vertical");
+
+       transform.Rotate(Vector3.back, turnSpeed * hInput * Time.deltaTime);
+       transform.Translate(Vector3.up * speed * vInput *Time.deltaTime);
+       // The -x side of the wall
+       if(transform.position.x < -xRange)
+       {
+           transform.position = new Vector3 (-xRange, transform.position.y, transform.position.z);
+       }
+       // The x side of the wall
+       if(transform.position.x > xRange)
+       {
+           transform.position = new Vector3(xRange, transform.position.y, transform.position.z);
+       }
+       if(transform.position.y > yRange)
+       {
+           transform.position = new Vector3(transform.position.x, yRange, transform.position.z);
+       }
+       if(transform.position.y < -yRange)
+       {
+           transform.position = new Vector3(transform.position.x, -yRange, transform.position.z);
+       }
+       
+
         moveDirection = Input.GetAxis("Horizontal");
         // Animate
         if(moveDirection > 0 && facingRight)
@@ -49,7 +79,15 @@ public class PlayerController : MonoBehaviour
             rigidbody2d.velocity = Vector2.up * jumpVelocity;
         }
     }
-    
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+       if(collision.CompareTag("Collect"))
+       {
+           print("We have collected a carrot to defeat the enemy!");
+           Destroy(collision.gameObject);
+       }
+    }
+
     private void FlipCharacter()
     {
         facingRight = facingRight;

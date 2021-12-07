@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class FlyingEnemy : MonoBehaviour
-{
+{ //Used Unity: Flying Enemy (Root Game) as a reference
     public float speed;
     public bool chase = false;
     public Transform startingPoint;
@@ -30,14 +30,17 @@ public class FlyingEnemy : MonoBehaviour
         }
         Flip();
     }
+    // Makes the enemy chase the player
     private void Chase()
     {
         transform.position = Vector2.MoveTowards (transform.position, player.transform.position, speed * Time.deltaTime);
     }
+    // When the player is back at the starting point, then the enemy will go back to its starting point
     private void ReturnStartPoint()
     {
         transform.position = Vector2.MoveTowards(transform.position, startingPoint.position, speed * Time.deltaTime);
     }
+    // Causes the enemy to flip where it is looking wherever the player is going
     private void Flip()
     {
         if(transform.position.x>player.transform.position.x)

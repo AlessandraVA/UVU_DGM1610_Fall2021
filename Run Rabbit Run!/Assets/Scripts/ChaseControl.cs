@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ChaseControl : MonoBehaviour
 {
+    // Makes the enemy chase the player, but now it is flying
     public FlyingEnemy[] enemyArray;
     private void OnTriggerEnter2D(Collider2D collision)
     {
