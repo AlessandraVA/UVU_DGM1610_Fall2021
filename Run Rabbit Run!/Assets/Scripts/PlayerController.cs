@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     public float yRange = 4.62f;
     
     public GameObject projectile;
+    public Transform launcher;
     public Vector3 offset = new Vector3(0,1,0);
 
     private LayerMask layerMask;
@@ -24,6 +25,8 @@ public class PlayerController : MonoBehaviour
     private bool facingRight = true;
     private float moveDirection;
     private bool isJumping = false;
+
+    
 
     // Awake is called after all objects are installed. Called in randomized order
     private void Awake()
@@ -59,7 +62,11 @@ public class PlayerController : MonoBehaviour
        {
            transform.position = new Vector3(transform.position.x, -yRange, transform.position.z);
        }
-       
+       if(Input.GetKeyDown(KeyCode.Space))
+        {
+            Instantiate(projectile, launcher.transform.position, launcher.transform.rotation);
+        }
+
 
         moveDirection = Input.GetAxis("Horizontal");
         // Animate
@@ -73,11 +80,6 @@ public class PlayerController : MonoBehaviour
         }
         rb.velocity = new Vector2(moveDirection * moveSpeed, rb.velocity.y);        // Movement
 
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            float jumpVelocity = 10f;
-            rigidbody2d.velocity = Vector2.up * jumpVelocity;
-        }
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {

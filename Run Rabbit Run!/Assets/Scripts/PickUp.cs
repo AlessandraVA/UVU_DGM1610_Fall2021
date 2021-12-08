@@ -4,15 +4,20 @@ using UnityEngine;
 
 public class PickUp : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+   public string pickupName;
+   public int amount;
+
+    public GameManager gameManager;
+
+    void Update() 
     {
-        
+        transform.Rotate(Vector3.back * 20 * Time.deltaTime);
     }
 
-    // Update is called once per frame
-    void Update()
+    void OnTriggerEnter2D(Collider2D other)
     {
-        
+        print("You picked up a " + pickupName);
+        gameManager.hasKey = true;
+        Destroy(gameObject);
     }
 }

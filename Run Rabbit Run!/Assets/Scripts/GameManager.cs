@@ -4,15 +4,23 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public bool hasKey;
+    public bool isDoorLocked;
+
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        hasKey = false;
+        isDoorLocked = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if(hasKey && !isDoorLocked)
+        {
+            print("You did it! You escaped the evil Hawk! Hurray!!!");
+        }
     }
 }
