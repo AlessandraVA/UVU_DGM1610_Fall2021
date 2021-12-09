@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    // Basic movement
      public float speed = 25.0f;
     public float turnSpeed = 50.0f;
     public float hInput;
@@ -15,26 +16,49 @@ public class PlayerController : MonoBehaviour
     public Transform launcher;
     public Vector3 offset = new Vector3(0,1,0);
 
-    private LayerMask layerMask;
-    private Rigidbody2D rigidbody2d;
-    public float moveSpeed;
-    public float jumpforce;
-    private BoxCollider2D boxCollider2d;
+    
+
+    // Audio source and sounds to play
+    public AudioClip shootSFX;
+   private AudioSource audioSource;
 
     private Rigidbody2D rb;
-    private bool facingRight = true;
-    private float moveDirection;
-    private bool isJumping = false;
-
+    public float jumpForce;
+    private float moveInput;
     
+
+    private bool isGrounded;
+    public Transform feetPos;
+    public float checkRadius;
+    public LayerMask whatIsGround;
+
+    private float jumpTimeCounter;
+    public float jumpTime;
+    private bool isJumping;
 
     // Awake is called after all objects are installed. Called in randomized order
     private void Awake()
     {
-        rb = GetComponent<Rigidbody2D>();           //will look for a component on the GameObject of the Rigidbody 2D type
-        rigidbody2d = transform.GetComponent<Rigidbody2D>();
-        boxCollider2d = transform.GetComponent<BoxCollider2D>();
+        audioSource = GetComponent<AudioSource>();
     }
+
+
+
+    void Start()
+    {
+        rb = GetComponent<Rigidbody2D>();
+    }
+
+
+    void FixedUpdate()
+    {
+        // Player can move left to right
+        moveInput = Input.GetAxisRaw("Horizontal");
+        rb.velocity = new Vector2(moveInput * speed, rb.velocity.y);
+    }
+
+
+
 
     // Update is called once per frame
     void Update()
@@ -67,32 +91,47 @@ public class PlayerController : MonoBehaviour
             Instantiate(projectile, launcher.transform.position, launcher.transform.rotation);
         }
 
+        // Jump from the ground up
+        isGrounded = Physics2D.OverlapCircle(feetPos.position, checkRadius, whatIsGround);
 
-        moveDirection = Input.GetAxis("Horizontal");
-        // Animate
-        if(moveDirection > 0 && facingRight)
+        if(isGrounded == true && Input.GetKeyDown(KeyCode.Space))
         {
-            FlipCharacter();
+            isJumping = true;
+            jumpTimeCounter = jumpTime;
+            rb.velocity = Vector2.up * jumpForce;
         }
-        else if(moveDirection < 0 && facingRight)
+        // Jumping mechanics
+        if(Input.GetKey(KeyCode.Space) && isJumping == true)
         {
-            FlipCharacter();
+            if(jumpTimeCounter > 0)
+            {
+                rb.velocity = Vector2.up * jumpForce;
+                jumpTimeCounter -= Time.deltaTime;
+            }
+            else
+            {
+                isJumping = false;
+            }
         }
-        rb.velocity = new Vector2(moveDirection * moveSpeed, rb.velocity.y);        // Movement
-
+        if(Input.GetKeyUp(KeyCode.Space))
+        {
+            isJumping = false;
+        }
     }
+    void Shoot()
+    {
+        //Play shoot sound effect
+        audioSource.PlayOneShot(shootSFX);
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
-       if(collision.CompareTag("Collect"))
-       {
-           print("We have collected a carrot to defeat the enemy!");
-           Destroy(collision.gameObject);
-       }
+        //If the player touches the carrots in the game, it will say "".
+        if(collision.CompareTag("Collect"))
+        {
+            print("We have collected a carrot to defeat the enemy!");
+            Destroy(collision.gameObject);
+        }
     }
 
-    private void FlipCharacter()
-    {
-        facingRight = facingRight;
-        transform.Rotate(0f, 180f, 0f);
-    }
 }

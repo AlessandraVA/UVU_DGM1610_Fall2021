@@ -9,6 +9,7 @@ public class MoveForward : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Makes the carrot launcher move straight up when I shoot with the space bar
         transform.Translate(Vector3.up * speed * Time.deltaTime);
     }
 }
