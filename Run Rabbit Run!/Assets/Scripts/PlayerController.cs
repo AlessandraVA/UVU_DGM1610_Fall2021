@@ -16,7 +16,9 @@ public class PlayerController : MonoBehaviour
     public Transform launcher;
     public Vector3 offset = new Vector3(0,1,0);
 
-    
+    //Key mechanics
+    public Transform keyFollowPoint;
+    public Key followingKey;
 
     // Audio source and sounds to play
     public AudioClip shootSFX;
@@ -53,7 +55,7 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
     {
         // Player can move left to right
-        moveInput = Input.GetAxisRaw("Horizontal");
+        moveInput = Input.GetAxis("Horizontal");
         rb.velocity = new Vector2(moveInput * speed, rb.velocity.y);
     }
 
