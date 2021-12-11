@@ -38,6 +38,9 @@ public class PlayerController : MonoBehaviour
     public float jumpTime;
     private bool isJumping;
 
+    //today
+    public GameObject gameOverText, restartButton;
+
     // Awake is called after all objects are installed. Called in randomized order
     private void Awake()
     {
@@ -49,6 +52,10 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+
+        //today
+        gameOverText.SetActive (false);
+        restartButton.SetActive(false);
     }
 
 
@@ -134,6 +141,18 @@ public class PlayerController : MonoBehaviour
             print("We have collected a carrot to defeat the enemy!");
             Destroy(collision.gameObject);
 
+        }
+    }
+
+    void OnCollisionEnter2D(Collision2D col)
+    {
+        //today
+        if(col.gameObject.tag.Equals("FlyingEnemy"))
+        {
+            gameOverText.SetActive(true);
+            restartButton.SetActive(true);
+            
+            gameObject.SetActive(false);
         }
     }
 
