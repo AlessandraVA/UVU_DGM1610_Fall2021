@@ -49,14 +49,6 @@ public class FlyingEnemy : MonoBehaviour
         {
             transform.rotation = Quaternion.Euler(0, 180,0);
         }
-        void OnTriggerEnter2D(Collider2D other)
-    {
-        //Destroy enemy if the collider hitting the trigger has the tag projectile
-        if(other.CompareTag("Projectile"))
-           {
-               print("Projectile Hit Enemy");
-               Destroy(gameObject,0.5f);
-           } 
-    }
+        
     }
 }

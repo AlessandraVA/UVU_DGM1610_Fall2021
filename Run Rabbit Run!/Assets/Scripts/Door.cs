@@ -40,6 +40,9 @@ public class Door : MonoBehaviour
 
                 // Once the player gets the key to open the door, the particle effect will indicate that it worked
                 collectEffect.SetActive(true);
+
+                 print("You opened the Den, Good job!");
+
             }
         }
 

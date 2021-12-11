@@ -133,6 +133,7 @@ public class PlayerController : MonoBehaviour
         {
             print("We have collected a carrot to defeat the enemy!");
             Destroy(collision.gameObject);
+
         }
     }
 

@@ -16,6 +16,8 @@ public class Key : MonoBehaviour
         if(isFollowing)
         {
             transform.position = Vector3.Lerp(transform.position, followTarget.position, followSpeed * Time.deltaTime);
+
+            print("You Got The Key To Unlock The Den, Hurry And Get Back Home!");
         }
     }
     private void OnTriggerEnter2D(Collider2D other)
