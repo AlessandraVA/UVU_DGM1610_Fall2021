@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class healthmanager : MonoBehaviour
 {
     public GameObject heart1, heart2, heart3;
     public static int health;
+    
 
 
     // Start is called before the first frame update
@@ -43,7 +45,9 @@ public class healthmanager : MonoBehaviour
             heart1.gameObject.SetActive(false);
             heart2.gameObject.SetActive(false);
             heart3.gameObject.SetActive(false);
-            Time.timeScale = 0;
+
+            SceneManager.LoadScene("GameOver");
+            //Time.timeScale = 0;
             break;
         }
     }

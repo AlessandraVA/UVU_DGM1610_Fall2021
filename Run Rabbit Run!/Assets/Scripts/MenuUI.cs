@@ -8,7 +8,7 @@ public class MenuUI : MonoBehaviour
     // On Button Press Play Game
     public void OnPlayButton()
     {
-        SceneManager.LoadScene("Game");
+        SceneManager.LoadScene("SampleScene");
     }
 
     
