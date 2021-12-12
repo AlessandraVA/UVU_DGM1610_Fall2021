@@ -9,6 +9,7 @@ TagManager:
   - Projectile
   - FlyingEnemy
   - Ground
+  - Bullet
   layers:
   - Default
   - TransparentFX

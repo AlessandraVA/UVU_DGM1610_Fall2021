@@ -44,6 +44,7 @@ public class PlayerController : MonoBehaviour
     // Awake is called after all objects are installed. Called in randomized order
     private void Awake()
     {
+         //Audio
         audioSource = GetComponent<AudioSource>();
     }
 
@@ -72,6 +73,8 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+       
+
        hInput = Input.GetAxisRaw("Horizontal");
        vInput = Input.GetAxisRaw("Vertical");
 
@@ -130,7 +133,7 @@ public class PlayerController : MonoBehaviour
     void Shoot()
     {
         //Play shoot sound effect
-        audioSource.PlayOneShot(shootSFX);
+        audioSource.Play();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

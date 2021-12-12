@@ -8,12 +8,19 @@ public class FlyingEnemy : MonoBehaviour
     public bool chase = false;
     public Transform startingPoint;
     private GameObject player;
+
+    AudioSource audioSource;
+
+    // How many hits does it take to kill the enemy
+    private int health = 20;
     
 
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -50,5 +57,18 @@ public class FlyingEnemy : MonoBehaviour
             transform.rotation = Quaternion.Euler(0, 180,0);
         }
         
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        // When the Bullet prefab hits the enemy then it will hit it directly and not shoot right through which then leads to defeating the enemy!
+        if(collision.CompareTag("Bullet"))
+        {
+            audioSource.Play();
+            Destroy(collision.gameObject);
+
+            health--;
+            if(health <= 0)
+                Destroy(gameObject);
+        }
     }
 }

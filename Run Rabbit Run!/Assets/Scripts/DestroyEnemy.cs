@@ -13,6 +13,7 @@ public class DestroyEnemy : MonoBehaviour
         // Should have named it different, but this is for the missles that are being launched, once at a distant lenght it will disappear.
         if(transform.position.y > topBound)
         {
+            // when the bullet flies it disappears instead of going on forever.
             Destroy(gameObject);
         }
     }
