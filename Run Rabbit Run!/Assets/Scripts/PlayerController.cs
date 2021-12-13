@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -40,6 +41,7 @@ public class PlayerController : MonoBehaviour
 
 
 
+
     // Awake is called after all objects are installed. Called in randomized order
     private void Awake()
     {
@@ -52,7 +54,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-
+    
     }
 
 
@@ -69,12 +71,10 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       
 
        hInput = Input.GetAxisRaw("Horizontal");
        vInput = Input.GetAxisRaw("Vertical");
 
-       transform.Rotate(Vector3.back, turnSpeed * hInput * Time.deltaTime);
        transform.Translate(Vector3.up * speed * vInput *Time.deltaTime);
        // The -x side of the wall
        if(transform.position.x < -xRange)
@@ -139,7 +139,6 @@ public class PlayerController : MonoBehaviour
         {
             print("We have collected a carrot to defeat the enemy!");
             Destroy(collision.gameObject);
-
         }
     }
 

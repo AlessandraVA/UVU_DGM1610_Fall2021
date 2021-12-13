@@ -10,6 +10,9 @@ TagManager:
   - FlyingEnemy
   - Ground
   - Bullet
+  - Won
+  - Text
+  - Win Text
   layers:
   - Default
   - TransparentFX
